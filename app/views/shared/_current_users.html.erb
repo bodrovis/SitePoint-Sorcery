@@ -1,0 +1,8 @@
+<div class="col-sm-3 well well-sm">
+  <h3>Currently active users:</h3>
+  <ul>
+    <% current_users.each do |user| %>
+      <li><%= user.name %></li>
+    <% end %>
+  </ul>
+</div>
