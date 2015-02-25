@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create] do
+    member do
+      get :activate
+    end
+  end
+
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/sign_up', to: 'users#new', as: :sign_up

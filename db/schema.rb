@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213134233) do
+ActiveRecord::Schema.define(version: 20150225125825) do
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                    null: false
@@ -29,8 +45,12 @@ ActiveRecord::Schema.define(version: 20150213134233) do
     t.datetime "last_logout_at"
     t.datetime "last_activity_at"
     t.string   "last_login_from_ip_address"
+    t.string   "activation_state"
+    t.string   "activation_token"
+    t.datetime "activation_token_expires_at"
   end
 
+  add_index "users", ["activation_token"], name: "index_users_on_activation_token"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at"
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
