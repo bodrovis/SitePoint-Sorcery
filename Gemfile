@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.5'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.1'
 
 gem 'validates_email_format_of'
 

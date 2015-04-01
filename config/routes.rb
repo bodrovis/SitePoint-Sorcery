@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reset_passwords, only: [:new, :create, :update, :edit]
+
   resources :sessions, only: [:new, :create, :destroy]
 
   get '/sign_up', to: 'users#new', as: :sign_up
